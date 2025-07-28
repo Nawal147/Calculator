@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 
 app = Flask(__name__)
-
+#Helllllo ya nawaaaaaal
 @app.route('/', methods=['GET', 'POST'])
 def calculator():
     result = None
