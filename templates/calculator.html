@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cute Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f8ffae 0%, #43cea2 100%);
+            font-family: 'Quicksand', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .calculator {
+            background: #fff;
+            padding: 2rem 2.5rem;
+            border-radius: 25px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.17);
+            text-align: center;
+            min-width: 300px;
+        }
+        .calculator h1 {
+            color: #43cea2;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+        .input-group {
+            margin-bottom: 1rem;
+        }
+        input[type="number"] {
+            padding: 0.5rem;
+            border-radius: 10px;
+            border: 1px solid #43cea2;
+            width: 100px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+        select {
+            padding: 0.5rem;
+            border-radius: 10px;
+            border: 1px solid #43cea2;
+            font-size: 1.1rem;
+        }
+        button {
+            background: #43cea2;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 0.7rem 2rem;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: #2f8f7b;
+        }
+        .result {
+            margin-top: 1.5rem;
+            font-size: 1.3rem;
+            color: #f67280;
+            font-weight: bold;
+        }
+        .emoji {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="emoji">🧸</div>
+        <h1>Cute Calculator</h1>
+        <form method="post">
+            <div class="input-group">
+                <input type="number" name="num1" step="any" placeholder="First number" required>
+            </div>
+            <div class="input-group">
+                <select name="operation">
+                    <option value="add">➕ Add</option>
+                    <option value="subtract">➖ Subtract</option>
+                    <option value="multiply">✖️ Multiply</option>
+                    <option value="divide">➗ Divide</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <input type="number" name="num2" step="any" placeholder="Second number" required>
+            </div>
+            <button type="submit">Calculate</button>
+        </form>
+        {% if result is not none %}
+            <div class="result">
+                Result: {{ result }}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
