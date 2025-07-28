@@ -7,86 +7,144 @@
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(135deg, #f8ffae 0%, #43cea2 100%);
+            background: linear-gradient(120deg, #f8ffae 0%, #43cea2 100%);
             font-family: 'Quicksand', sans-serif;
+            min-height: 100vh;
+            margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
+            overflow: hidden;
+        }
+        .background-blob {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, #f67280 0%, #43cea2 70%, transparent 100%);
+            filter: blur(120px);
+            z-index: 0;
+            left: -200px;
+            top: -200px;
+            opacity: 0.5;
         }
         .calculator {
-            background: #fff;
-            padding: 2rem 2.5rem;
-            border-radius: 25px;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.17);
-            text-align: center;
-            min-width: 300px;
+            position: relative;
+            background: rgba(255, 255, 255, 0.75);
+            border-radius: 30px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.27);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.18);
+            padding: 2.5rem 3rem 2rem 3rem;
+            min-width: 350px;
+            z-index: 1;
+            animation: floatIn 1.2s cubic-bezier(.68,-0.55,.27,1.55);
+        }
+        @keyframes floatIn {
+            0% { transform: translateY(60px) scale(0.95); opacity: 0; }
+            100% { transform: translateY(0) scale(1); opacity: 1; }
         }
         .calculator h1 {
             color: #43cea2;
-            margin-bottom: 1.5rem;
-            font-size: 2rem;
-        }
-        .input-group {
-            margin-bottom: 1rem;
-        }
-        input[type="number"] {
-            padding: 0.5rem;
-            border-radius: 10px;
-            border: 1px solid #43cea2;
-            width: 100px;
-            text-align: center;
-            font-size: 1.1rem;
-        }
-        select {
-            padding: 0.5rem;
-            border-radius: 10px;
-            border: 1px solid #43cea2;
-            font-size: 1.1rem;
-        }
-        button {
-            background: #43cea2;
-            color: #fff;
-            border: none;
-            border-radius: 10px;
-            padding: 0.7rem 2rem;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        button:hover {
-            background: #2f8f7b;
-        }
-        .result {
-            margin-top: 1.5rem;
-            font-size: 1.3rem;
-            color: #f67280;
-            font-weight: bold;
+            margin-bottom: 2rem;
+            font-size: 2.3rem;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 8px #f67280aa;
         }
         .emoji {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 1rem;
+            filter: drop-shadow(0 2px 6px #f67280aa);
+        }
+        .input-group {
+            margin-bottom: 1.2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        input[type="number"] {
+            padding: 0.7rem 1rem;
+            border-radius: 15px;
+            border: none;
+            outline: none;
+            box-shadow: 0 2px 8px #43cea233;
+            width: 120px;
+            text-align: center;
+            font-size: 1.2rem;
+            background: rgba(255,255,255,0.7);
+            margin: 0 0.5rem;
+            transition: box-shadow 0.2s;
+        }
+        input[type="number"]:focus {
+            box-shadow: 0 0 0 2px #43cea2aa;
+        }
+        select {
+            padding: 0.7rem 1.2rem;
+            border-radius: 15px;
+            border: none;
+            font-size: 1.2rem;
+            background: rgba(67,206,162,0.12);
+            color: #43cea2;
+            margin: 0 0.5rem;
+            box-shadow: 0 2px 8px #43cea233;
+            transition: background 0.2s, color 0.2s;
+        }
+        select:focus {
+            background: #43cea2;
+            color: #fff;
+        }
+        button {
+            background: linear-gradient(90deg, #43cea2 0%, #f67280 100%);
+            color: #fff;
+            border: none;
+            border-radius: 15px;
+            padding: 0.9rem 2.5rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 16px #f6728055;
+            margin-top: 1rem;
+            transition: transform 0.18s, box-shadow 0.18s, background 0.25s;
+            letter-spacing: 1px;
+        }
+        button:hover {
+            transform: translateY(-3px) scale(1.04) rotate(-1deg);
+            box-shadow: 0 8px 32px #f67280aa;
+            background: linear-gradient(90deg, #f67280 0%, #43cea2 100%);
+        }
+        .result {
+            margin-top: 2rem;
+            font-size: 1.5rem;
+            color: #f67280;
+            font-weight: bold;
+            text-shadow: 0 2px 10px #43cea299;
+            animation: popIn 0.6s cubic-bezier(.68,-0.55,.27,1.55);
+        }
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .footer {
+            margin-top: 2.5rem;
+            font-size: 0.97rem;
+            color: #aaa;
+            letter-spacing: 1px;
         }
     </style>
 </head>
 <body>
+    <div class="background-blob"></div>
     <div class="calculator">
         <div class="emoji">🧸</div>
         <h1>Cute Calculator</h1>
-        <form method="post">
+        <form method="post" autocomplete="off">
             <div class="input-group">
                 <input type="number" name="num1" step="any" placeholder="First number" required>
-            </div>
-            <div class="input-group">
                 <select name="operation">
                     <option value="add">➕ Add</option>
                     <option value="subtract">➖ Subtract</option>
                     <option value="multiply">✖️ Multiply</option>
                     <option value="divide">➗ Divide</option>
                 </select>
-            </div>
-            <div class="input-group">
                 <input type="number" name="num2" step="any" placeholder="Second number" required>
             </div>
             <button type="submit">Calculate</button>
@@ -96,6 +154,7 @@
                 Result: {{ result }}
             </div>
         {% endif %}
+        <div class="footer">Made with <span style="color:#f67280">♥</span> for you!</div>
     </div>
 </body>
 </html>
